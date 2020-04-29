@@ -1,0 +1,126 @@
+<br>
+<div class="container">
+    <div class="row">
+        <!-- Total-->
+        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+            <div class="card text-white bg-primary mb-3 nav navbar-nav" style="max-width: 20rem; max-height:8rem;">
+                <div class="card-header">Total</div>
+                <div class="card-body">
+                    <p class="card-text">{{ totalCase }}<span style="font-size: small; color:#252225de;"> &uarr;
+                            {{dailyconfirmed}}</span></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Total Recovered-->
+        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+            <div class="card text-white bg-success mb-3" style="max-width: 20rem; max-height:8rem;">
+                <div class="card-header">Recovered</div>
+                <div class="card-body">
+                    <p class="card-text">{{ totalrecovered }}<span style="font-size: small; color:#252225de;"> &uarr;
+                            {{dailyrecovered}}</span></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Active Case-->
+        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+            <div class="card text-white bg-warning mb-3" style="max-width: 20rem; max-height:8rem;">
+                <div class="card-header">Active</div>
+                <div class="card-body">
+                    <p class="card-text">{{ totalActive }}</p>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Active Case-->
+        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+            <div class="card text-white bg-danger mb-3" style="max-width: 20rem; max-height:8rem;">
+                <div class="card-header">Deceased</div>
+                <div class="card-body">
+                    <p class="card-text">{{ totaldeceased }}<span style="font-size: small; color:#252225de;"> &uarr;
+                            {{dailydeceased}}</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+            <canvas id="myChart2" class="h-100 w-100"></canvas>
+        </div>
+        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+            <br><br>
+            <canvas id="myChart" style="height:35vh; width:35vw"></canvas>
+        </div>
+    </div>
+    <div class="container">
+        <br>
+        <div class="row">
+            <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+
+                    <!-- states Column -->
+                    <ng-container matColumnDef="states">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> State</th>
+                        <td mat-cell *matCellDef="let element" style="color: rgb(78, 56, 75);"
+                            (click)="show(element.state)"> {{element.state}} </td>
+                    </ng-container>
+
+                    <!-- confirmed Column -->
+                    <ng-container matColumnDef="confirmed">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Confirmed</th>
+                        <td mat-cell *matCellDef="let element" style="color: blue;" (click)="show(element.state)">
+                            {{element.confirmed}} </td>
+                    </ng-container>
+
+                    <!-- active Column -->
+                    <ng-container matColumnDef="active">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Active </th>
+                        <td mat-cell *matCellDef="let element" style="color: rgb(77, 77, 31);"
+                            (click)="show(element.state)"> {{element.active}} </td>
+                    </ng-container>
+
+                    <!-- recovered Column -->
+                    <ng-container matColumnDef="recovered">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Recovered </th>
+                        <td mat-cell *matCellDef="let element" style="color: green;" (click)="show(element.state)">
+                            {{element.recovered}} </td>
+                    </ng-container>
+
+                    <!-- deaths Column -->
+                    <ng-container matColumnDef="deaths">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Deaths </th>
+                        <td mat-cell *matCellDef="let element" style="color: red;" (click)="show(element.state)">
+                            {{element.deaths}} </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+                <mat-paginator [pageSizeOptions]="[6]" showFirstLastButtons></mat-paginator>
+            </div>
+            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                <br><br>
+                <!--<h5 style="text-align: center;">&nbsp;&nbsp;&nbsp; {{stateNames}} </h5>-->
+                <canvas id="stateGraph" style="height:35vh; width:35vw"></canvas>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+
+                </div>
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"></div>
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"></div>
+            </div>
+
+        </div>
+        <div class="container">
+            <div class="row">
+                <canvas id="myChart3" style="height:80vh; width:85vw"></canvas>
+            </div>
+        </div>
+    </div>
